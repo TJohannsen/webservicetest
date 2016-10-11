@@ -34,18 +34,20 @@ app.get("", function(req, res) {
                 if (err) {
                     console.log(err);
                     viewmsg = "Datei konnte nicht gelesen werden.";
+                    res.end(viewmsg);
                 } else {
                     var mytext = data.toString();
                     console.log("Current text: '" + mytext + "'");
                     viewmsg = "Der derzeitige Anzeigetext ist: '" + mytext + "'";
+                    res.end(viewmsg);
                 }
             });
         } else {
             console.log("File not created yet.");
             viewmsg = "Kein Text hinterlegt.";
+            res.end(viewmsg);
         }
     });
-    res.end(viewmsg);
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {

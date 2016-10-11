@@ -28,13 +28,20 @@ app.get("/hello", function(req, res) {
 
 app.get("", function(req, res) {
     var viewmsg = "";
-    fs.readFile('mystr.txt', function (err, data) {
-        if (err) {
-            console.log(err);
-            viewmsg = "Text nicht vorhanden oder konnte nicht gelesen werden.";
+    fs.access("mystr.txt", fs.F_OK, function(err) {
+        if (!err) {
+            fs.readFile('mystr.txt', function (err, data) {
+                if (err) {
+                    console.log(err);
+                    viewmsg = "Datei konnte nicht gelesen werden.";
+                } else {
+                    var mytext = data.toString();
+                    viewmsg = "Der derzeitige Anzeigetext ist: '" + mytext + "'";
+                }
+            });
         } else {
-            var mytext = data.toString();
-            viewmsg = "Der derzeitige Anzeigetext ist: '" + mytext + "'";
+            console.log("File not created yet.");
+            viewmsg = "Kein Text hinterlegt.";
         }
     });
     res.end(viewmsg);

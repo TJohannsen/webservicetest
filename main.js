@@ -3,6 +3,7 @@ var express = require("express");
 var app = express();
 var fs = require("fs");
 var bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 
 app.post("/newtext", function (req, res) {
@@ -22,5 +23,7 @@ app.get("/hello", function(req, res) {
     console.log("Example app listening at http://%s:%s", host, port)
 }); */
 
-const server = express()
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+var server = app.listen(process.env.PORT || 8080, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
+});

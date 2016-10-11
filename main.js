@@ -8,15 +8,36 @@ app.use(bodyParser.json());
 
 app.post("/newtext", function (req, res) {
     var text = req.body.text;
-    console.log(text);
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end("Successful!");
+    var answertext = "";
+    fs.writeFile("mystr.txt", text, function(err) {
+        if(err) {
+            console.log(err);
+            answertext = "Konnte den Text nicht abspeichern.";
+        } else {
+            console.log("New text: '" + text + "'");
+            answertext = "Der neue Text ist nun: '" + text + "'";
+        }
+    }); 
+    res.end(answertext);
 });
 
 app.get("/hello", function(req, res) {
     console.log("hi there!");
-    res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end("Hey back!");
+});
+
+app.get("", function(req, res) {
+    var viewmsg = "";
+    fs.readFile('mystr.txt', function (err, data) {
+        if (err) {
+            console.log(err);
+            viewmsg = "Text nicht vorhanden oder konnte nicht gelesen werden.";
+        } else {
+            var mytext = data.toString();
+            viewmsg = "Der derzeitige Anzeigetext ist: '" + mytext + "'";
+        }
+    });
+    res.end(viewmsg);
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {

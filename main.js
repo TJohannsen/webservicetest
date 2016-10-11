@@ -22,7 +22,7 @@ app.post("/newtext", function (req, res) {
 });
 
 app.get("/hello", function(req, res) {
-    console.log("hi there!");
+    console.log("Ping requested.");
     res.end("Hey back!");
 });
 
@@ -36,6 +36,7 @@ app.get("", function(req, res) {
                     viewmsg = "Datei konnte nicht gelesen werden.";
                 } else {
                     var mytext = data.toString();
+                    console.log("Current text: '" + mytext + "'");
                     viewmsg = "Der derzeitige Anzeigetext ist: '" + mytext + "'";
                 }
             });

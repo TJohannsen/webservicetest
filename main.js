@@ -13,12 +13,13 @@ app.post("/newtext", function (req, res) {
         if(err) {
             console.log(err);
             answertext = "Konnte den Text nicht abspeichern.";
+            res.end(answertext);
         } else {
             console.log("New text: '" + text + "'");
             answertext = "Der neue Text ist nun: '" + text + "'";
+            res.end(answertext);
         }
     }); 
-    res.end(answertext);
 });
 
 app.get("/hello", function(req, res) {

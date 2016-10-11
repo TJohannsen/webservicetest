@@ -1,0 +1,27 @@
+{
+  "name": "webservicetest",
+  "version": "1.0.0",
+  "description": "First version of webservicetest",
+  "main": "main.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {},
+  "config": {
+	"port": "8081"
+  },
+  "scripts": {
+    "test": "console.log(\"hi!\")",
+	"start": "node main.js"
+  },
+  "keywords": [
+    "breiholz"
+  ],
+  "author": "tjohannsen",
+  "license": "ISC",
+  "engines": {
+    "node": "6.7.0"
+  }
+}
